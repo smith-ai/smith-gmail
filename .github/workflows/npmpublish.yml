@@ -13,11 +13,11 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
           scope: '@smith-ai'
-      - run: envsubst < .npmrc > .npmrc
-      - run: envsubst < .npmrc > ~/.npmrc
-      - run: cp .npmrc ~/.npmrc
       - run: npm config set registry https://npm.pkg.github.com/smith-ai
       - run: npm ci
+        env:
+          NPM_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: npm publish
         env:
           NPM_TOKEN: ${{secrets.GITHUB_TOKEN}}
