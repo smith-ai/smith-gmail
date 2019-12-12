@@ -29,18 +29,22 @@ action('what is in my inbox', async (params, config) => {
 
     const emails = await gmail.getEmails();
 
-    const subjects = emails.map((email) => {
-      const subject = email
-          .data
-          .payload
-          .headers
-          .filter((header) => header.name === 'Subject')[0]
-          .value;
+    const subjects = emails
+      .filter((email) => email.data.labelIds.includes('UNREAD'))
+      .map((email) => {
+        const subject = email
+            .data
+            .payload
+            .headers
+            .filter((header) => header.name === 'Subject')[0]
+            .value;
 
-      return `\n - ${subject}`;
-    });
+        return `\n - ${subject}`;
+      });
 
-    return `Here are your latest emails:${subjects.join('')}`;
+    return subjects.length > 0 
+      ? `Here are your latest emails:${subjects.join('')}`
+      : 'You have no new emails';
 });
 
 module.exports = {
