@@ -1,0 +1,13 @@
+{
+  "name": "@smith-ai/smith-gmail",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@smith-ai/smith-actions": "^1.0.0",
+    "googleapis": "^44.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
