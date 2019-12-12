@@ -14,6 +14,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@smith-ai'
       - run: envsubst < .npmrc > .npmrc
+      - run: mv .npmrc /home/runner/work/_temp/.npmrc
       - run: npm cache clean --force
       - run: npm ci
       - run: npm publish
